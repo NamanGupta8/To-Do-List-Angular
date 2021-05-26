@@ -1,0 +1,66 @@
+<div class="container">
+  <h1 class="text-center mt-5"> Todo List </h1>
+  <div class="row">
+    <div class="col-sm d-flex justify-content-center">
+      <div class="card shadow m-5 w-50">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-sm">
+              <div class="form-group">
+                <label for="usr" class="mb-2 mt-4"><b>Add Item:</b> {{input}}</label>
+                <input type="text" class="form-control" id="usr" placeholder="Press Enter after writing to Add"
+                  [(ngModel)]="input" (keyup.enter)="addToList()">
+              </div>
+            </div>
+          </div>
+          <br />
+          <hr class="new">
+          <div>
+            <b>Pending Tasks:</b>
+            <br /><br/>
+            <div class="row d-flex" *ngFor="let item of taskList">
+              <div class="col-sm-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [ngModel]="false"
+                    (ngModelChange)="checkBoxChanged($event, item)">
+                  <!-- <label class="form-check-label" for="flexCheckChecked" class="ml-5">
+                    <h6>{{item.value}}</h6>
+                  </label> -->
+                  <input type="text" class="form-control" placeholder="Press Enter after writing" [id]="item.id" [value]="item.value" [disabled]="true" (keyup.enter)="afterEdit($event, item)">
+                </div>
+              </div>
+              <div class="col-sm">
+                <button class="btn btn-primary m-2" (click)="onEdit(item)">Edit</button>
+                <button class="btn btn-primary m-2" (click)="onDelete(item, 'task')">Delete</button>
+              </div>
+
+            </div>
+          </div>
+          <br />
+          <hr class="new">
+          <div>
+            <b>Completed Tasks:</b>
+            <br /><br/>
+            <div class="row" *ngFor="let item of completedTaskList">
+              <div class="col-sm-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [ngModel]="true"
+                    (ngModelChange)="checkBoxChanged($event, item)">
+                  <label class="form-check-label" for="flexCheckChecked" class="ml-5">
+                    <h6><del>{{item.value}}</del></h6>
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm">
+                <button class="btn btn-primary m-2" (click)="onDelete(item, 'complete')">Delete</button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
